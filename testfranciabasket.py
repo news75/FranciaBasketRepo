@@ -21,8 +21,9 @@ class TestReceiptFormatCase(unittest.TestCase):
         self.receipt.set_tax(Decimal(2.53))
         self.receipt.set_total(Decimal(11.78))
 
-        self.assertEqual("1 book: 10.00\n1 book: 10.00\nSales Taxes: 2.53\nTotal: 11.78",
-                         self.receipt.deliver())
+        self.assertEqual(
+            "1 book: 10.00\n1 book: 10.00\nSales Taxes: 2.53\nTotal: 11.78",
+            self.receipt.deliver())
 
 
 class TestBasketCommunicateWithReceiptCase(unittest.TestCase):
@@ -106,7 +107,7 @@ class TestOrderCase(unittest.TestCase):
     def test_order_free_imported(self):
         order = Order('13 imported book at 10.00')
         price = Decimal('10.00')
-        tax = rounding_rule(price * Decimal('0.05') )
+        tax = rounding_rule(price * Decimal('0.05'))
 
         self.assertEqual(tax, order.tax())
 
@@ -114,7 +115,7 @@ class TestOrderCase(unittest.TestCase):
         order = Order('1 imported bottle of perfume at 10.00')
         price = Decimal('10.00')
         tax = rounding_rule(price*Decimal('0.05') + price*Decimal('0.10'))
-        
+
         self.assertEqual(tax, order.tax())
 
     def test_order_tax_check(self):
